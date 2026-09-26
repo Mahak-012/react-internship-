@@ -1,0 +1,171 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, sans-serif;
+}
+
+.signup-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  padding: 20px;
+}
+
+.signup-form {
+  background: #fff;
+  width: 100%;
+  max-width: 430px;
+  padding: 32px 28px;
+  border-radius: 14px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.signup-form h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 24px;
+  font-size: 26px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group > label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+input:focus,
+select:focus {
+  border-color: #2575fc;
+}
+
+.input-row {
+  position: relative;
+}
+
+.input-row input {
+  padding-right: 55px;
+}
+
+.toggle-btn {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  border: none;
+  background: none;
+  color: #2575fc;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.radio-group {
+  display: flex;
+  gap: 18px;
+}
+
+.radio-label,
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 400;
+  color: #333;
+  cursor: pointer;
+}
+
+.error-text {
+  color: #d93025;
+  font-size: 12.5px;
+  margin-top: 5px;
+}
+
+.input-error {
+  border-color: #d93025 !important;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+}
+
+.login-text {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: #555;
+}
+
+.login-text a {
+  color: #2575fc;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.success-card {
+  background: #fff;
+  width: 100%;
+  max-width: 430px;
+  padding: 40px 30px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.success-card h2 {
+  color: #1a7f37;
+  margin-bottom: 12px;
+}
+
+.success-sub {
+  color: #777;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* Responsive Layout */
+@media (max-width: 480px) {
+  .signup-form {
+    padding: 24px 18px;
+  }
+  .radio-group {
+    flex-wrap: wrap;
+  }
+}
