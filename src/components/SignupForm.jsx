@@ -3,7 +3,6 @@ import InputField from "./InputField";
 import "./SignupForm.css";
 
 function SignupForm() {
-  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -19,7 +18,6 @@ function SignupForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  // Event Handling: 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -28,7 +26,6 @@ function SignupForm() {
     });
   };
 
-  // Form Validation
   const validate = () => {
     const newErrors = {};
 
@@ -69,26 +66,28 @@ function SignupForm() {
     return newErrors;
   };
 
-  // Submit handler
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length === 0) {
-      setSubmitted(true); 
+      setSubmitted(true);
     }
   };
 
-  
+  // Success screen
   if (submitted) {
     return (
-      <div className="signup-container">
+      <div className="signup-page">
         <div className="success-card">
-          <h2>✅ Account Created Successfully!</h2>
-          <p>Welcome, {formData.fullName}!</p>
+          <div className="success-icon">🎉</div>
+          <h2>Account Created Successfully!</h2>
+          <p>
+            Welcome, <strong>{formData.fullName}</strong>!
+          </p>
           <p className="success-sub">
-            A confirmation email was sent to {formData.email}.
+            A confirmation email was sent to {formData.email}
           </p>
         </div>
       </div>
@@ -96,135 +95,154 @@ function SignupForm() {
   }
 
   return (
-    <div className="signup-container">
-      <form className="signup-form" onSubmit={handleSubmit} noValidate>
-        <h1>Create Account</h1>
+    <div className="signup-page">
+      <div className="signup-card">
+        {/* Left Brand Panel */}
+        <aside className="brand-panel">
+          <div className="brand-logo">M</div>
+          <h2>Join us today!</h2>
+          <p>Create your account in less than a minute.</p>
+          <ul className="brand-points">
+            <li>✦ Free forever</li>
+            <li>✦ No credit card required</li>
+            <li>✦ Works on every device</li>
+          </ul>
+        </aside>
 
-        {/* Full Name */}
-        <InputField
-          label="Full Name"
-          name="fullName"
-          value={formData.fullName}
-          onChange={handleChange}
-          error={errors.fullName}
-          placeholder="e.g. Mahak"
-        />
+        {/* Right Form Side */}
+        <div className="form-side">
+          <form className="signup-form" onSubmit={handleSubmit} noValidate>
+            <h1>Create Account</h1>
+            <p className="form-subtitle">Fill in your details to get started</p>
 
-        {/* Email */}
-        <InputField
-          label="Email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          error={errors.email}
-          placeholder="e.g. mahak@mail.com"
-        />
+            <InputField
+              label="Full Name"
+              name="fullName"
+              value={formData.fullName}
+              onChange={handleChange}
+              error={errors.fullName}
+              placeholder="e.g. Mahak Khan"
+            />
 
-        {/* Password */}
-        <InputField
-          label="Password"
-          name="password"
-          value={formData.password}
-          type={showPassword ? "text" : "password"}
-          onChange={handleChange}
-          error={errors.password}
-          placeholder="At least 6 characters"
-          rightElement={
-            <button
-              type="button"
-              className="toggle-btn"
-              onClick={() => setShowPassword(!showPassword)}
-            >
-              {showPassword ? "Hide" : "Show"}
-            </button>
-          }
-        />
+            <InputField
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              error={errors.email}
+              placeholder="e.g. mahak@mail.com"
+            />
 
-        {/* Confirm Password */}
-        <InputField
-          label="Confirm Password"
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          type={showConfirmPassword ? "text" : "password"}
-          onChange={handleChange}
-          error={errors.confirmPassword}
-          placeholder="Re-enter your password"
-          rightElement={
-            <button
-              type="button"
-              className="toggle-btn"
-              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-            >
-              {showConfirmPassword ? "Hide" : "Show"}
-            </button>
-          }
-        />
+            <InputField
+              label="Password"
+              name="password"
+              value={formData.password}
+              type={showPassword ? "text" : "password"}
+              onChange={handleChange}
+              error={errors.password}
+              placeholder="At least 6 characters"
+              rightElement={
+                <button
+                  type="button"
+                  className="toggle-btn"
+                  onClick={() => setShowPassword(!showPassword)}
+                >
+                  {showPassword ? "🙈" : "👁️"}
+                </button>
+              }
+            />
 
-        {/* Gender - Radio Buttons */}
-        <div className="form-group">
-          <label>Gender</label>
-          <div className="radio-group">
-            {["Male", "Female", "Other"].map((g) => (
-              <label key={g} className="radio-label">
+            <InputField
+              label="Confirm Password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              type={showConfirmPassword ? "text" : "password"}
+              onChange={handleChange}
+              error={errors.confirmPassword}
+              placeholder="Re-enter your password"
+              rightElement={
+                <button
+                  type="button"
+                  className="toggle-btn"
+                  onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                >
+                  {showConfirmPassword ? "🙈" : "👁️"}
+                </button>
+              }
+            />
+
+            {/* Gender - Pill Radio Buttons */}
+            <div className="form-group">
+              <label>Gender</label>
+              <div className="pill-group">
+                {["Male", "Female", "Other"].map((g) => (
+                  <label
+                    key={g}
+                    className={`pill ${formData.gender === g ? "pill-active" : ""}`}
+                  >
+                    <input
+                      type="radio"
+                      name="gender"
+                      value={g}
+                      checked={formData.gender === g}
+                      onChange={handleChange}
+                    />
+                    {g}
+                  </label>
+                ))}
+              </div>
+              {errors.gender && <p className="error-text">{errors.gender}</p>}
+            </div>
+
+            {/* Dropdown */}
+            <div className="form-group">
+              <label htmlFor="city">Country / City</label>
+              <select
+                id="city"
+                name="city"
+                value={formData.city}
+                onChange={handleChange}
+                className={errors.city ? "input-error" : ""}
+              >
+                <option value="">-- Select your city --</option>
+                <option value="Karachi">Karachi</option>
+                <option value="Lahore">Lahore</option>
+                <option value="Islamabad">Islamabad</option>
+                <option value="Multan">Multan</option>
+                <option value="Peshawar">Peshawar</option>
+                <option value="Quetta">Quetta</option>
+              </select>
+              {errors.city && <p className="error-text">{errors.city}</p>}
+            </div>
+
+            {/* Terms - Custom Checkbox */}
+            <div className="form-group">
+              <label className={`checkbox-card ${formData.terms ? "checkbox-active" : ""}`}>
                 <input
-                  type="radio"
-                  name="gender"
-                  value={g}
-                  checked={formData.gender === g}
+                  type="checkbox"
+                  name="terms"
+                  checked={formData.terms}
                   onChange={handleChange}
                 />
-                {g}
+                <span className="checkbox-box">{formData.terms ? "✓" : ""}</span>
+                <span>
+                  I agree to the <span className="terms-link">Terms &amp; Conditions</span>
+                </span>
               </label>
-            ))}
-          </div>
-          {errors.gender && <p className="error-text">{errors.gender}</p>}
+              {errors.terms && <p className="error-text">{errors.terms}</p>}
+            </div>
+
+            <button type="submit" className="submit-btn">
+              Create Account →
+            </button>
+
+            <p className="login-text">
+              Already have an account? <span className="terms-link">Login</span>
+            </p>
+          </form>
         </div>
-
-        {/* Dropdown - Select / Option */}
-        <div className="form-group">
-          <label htmlFor="city">Country / City</label>
-          <select
-            id="city"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            className={errors.city ? "input-error" : ""}
-          >
-            <option value="">-- Select your city --</option>
-            <option value="Karachi">Karachi</option>
-            <option value="Lahore">Lahore</option>
-            <option value="Islamabad">Islamabad</option>
-            <option value="Multan">Multan</option>
-            <option value="Peshawar">Peshawar</option>
-            <option value="Quetta">Quetta</option>
-          </select>
-          {errors.city && <p className="error-text">{errors.city}</p>}
-        </div>
-
-        {/* Terms & Conditions Checkbox */}
-        <div className="form-group">
-          <label className="checkbox-label">
-            <input
-              type="checkbox"
-              name="terms"
-              checked={formData.terms}
-              onChange={handleChange}
-            />
-            I agree to the Terms &amp; Conditions
-          </label>
-          {errors.terms && <p className="error-text">{errors.terms}</p>}
-        </div>
-
-        {/* Create Account Button */}
-        <button type="submit" className="submit-btn">
-          Create Account
-        </button>
-
-        <p className="login-text">
-          Already have an account? <a href="#">Login</a>
-        </p>
-      </form>
+      </div>
     </div>
   );
 }
