@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "sign-up-form",
+=======
+  "name": "welcome-app",
+>>>>>>> 741bc52c43551cc95a3ab92073475dd7a104dbae
   "private": true,
   "version": "0.0.0",
   "type": "module",
